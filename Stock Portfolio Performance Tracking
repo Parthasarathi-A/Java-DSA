@@ -1,3 +1,5 @@
+#Basic Approach for a start of understanding. But it will throw an TLE
+
 class HelloWorld {
     static int querysum(int queries[][], int array[], int querySize, int size) {
         for (int i = 0; i < querySize; i++) {
@@ -10,4 +12,27 @@ class HelloWorld {
             System.out.println("Sum for query " + (i + 1) + " (from " + L + " to " + R + "): " + sum);
         }
         return 0;
+    }
+
+
+# Optimized Approach:
+
+public class Solution {
+    public long[] rangeSum(int[] A, int[][] B) {
+        long[] pfs = new long[A.length];
+        pfs[0] = A[0];
+        for (int i = 1; i < A.length; i++) {
+            pfs[i] = pfs[i - 1] + A[i];
+        }
+        long[] res = new long[B.length];
+        for (int i = 0; i < B.length; i++) {
+            int l = B[i][0];
+            int r = B[i][1];
+            if (l == 0) {
+                res[i] = pfs[r];
+            } else {
+                res[i] = pfs[r] - pfs[l - 1];
+            }
+        }
+        return res;
     }
