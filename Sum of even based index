@@ -1,0 +1,23 @@
+class HelloWorld {
+    public static int[] even(int a[], int q[][], int n) {
+        int p[] = new int[n];
+        p[0] = a[0]; 
+        for (int i = 1; i < a.length; i++) {
+            if (i % 2 == 0) {
+                p[i] = p[i - 1] + a[i]; 
+            } else {
+                p[i] = p[i - 1]; 
+            }
+        }
+        int[] res = new int[q.length];
+        for (int i = 0; i < q.length; i++) {
+            int l = q[i][0];
+            int r = q[i][1];
+            if (l == 0) {
+                res[i] = p[r]; 
+            } else {
+                res[i] = p[r] - p[l - 1]; 
+            }
+        }
+        return res;
+    }
