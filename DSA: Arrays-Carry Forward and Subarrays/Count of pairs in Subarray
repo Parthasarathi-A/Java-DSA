@@ -1,0 +1,15 @@
+public class Solution {
+    public long solve(String A) {
+        int c=0;
+        int result=0;
+        for(int i=0;i<A.length();i++){
+            if(A.charAt(i)=='A'){
+                c++;
+            }
+            else if(A.charAt(i)=='G'){
+                result +=c;
+            }
+        }
+        return result;
+    }
+}
