@@ -1,0 +1,23 @@
+public class Solution {
+    public int[] solve(int[] A, int[][] B) {
+        int[] pfs = new int[A.length];
+        int count = 0;
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] % 2 == 0) {
+                count++;
+            }
+            pfs[i] = count;
+        }
+        int[] res = new int[B.length];
+        for (int i = 0; i < B.length; i++) {
+            int l = B[i][0];
+            int r = B[i][1];
+            if (l == 0) {
+                res[i] = pfs[r]; 
+            } else {
+                res[i] = pfs[r] - pfs[l - 1]; 
+            }
+        }
+        return res;
+    }
+}
