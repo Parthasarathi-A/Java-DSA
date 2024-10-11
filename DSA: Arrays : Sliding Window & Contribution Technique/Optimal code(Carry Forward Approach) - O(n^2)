@@ -1,0 +1,13 @@
+public class MaxProductSubArray {
+    public static int sum(int[] a) {
+        int n=a.length;
+        int total=0;
+        for(int i=0;i<n;i++){
+            int currentsum=0;
+            for(int j=i;j<n;j++){
+                currentsum+=a[j];
+                total+=currentsum;
+            }
+        }
+        return total;
+    }
