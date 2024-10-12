@@ -1,0 +1,12 @@
+public class SubArraySI {
+    public static int[][] getSubArrayIndices(int[] a, int k) {
+        int n = a.length;
+        int totalSubarrays = n - k + 1;
+        int[][] result = new int[totalSubarrays][2];  
+        for (int i = 0; i <= n - k; i++) {
+            int j = i + k - 1;  
+            result[i][0] = i;   
+            result[i][1] = j;   
+        }
+        return result;
+    }
