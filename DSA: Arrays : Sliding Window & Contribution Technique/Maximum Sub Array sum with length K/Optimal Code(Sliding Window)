@@ -1,0 +1,23 @@
+public class HelloWorld {
+    public static int maxk(int[] a, int k) {
+        int n = a.length;
+        int ans = Integer.MIN_VALUE;
+        int i = 0;
+        int j = k - 1;
+        int sum = 0;
+        // Calculate sum of the first subarray of length k
+        for (int x = i; x <= j; x++) {
+            sum += a[x];
+        }
+        ans = Math.max(ans, sum);
+        i++;
+        j++;
+        // Sliding window approach for the remaining subarrays
+        while (j < n) {
+            sum += a[j] - a[i - 1];
+            ans = Math.max(sum, ans);
+            i++;
+            j++;
+        }
+        return ans;
+    }
