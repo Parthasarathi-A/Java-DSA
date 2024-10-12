@@ -6,8 +6,8 @@ class HelloWorld {
         int j = k - 1;
         while (j < n) {
             int sum = 0;
-            for (int x = i; x <= j; x++) { // Use a different variable name (x) to avoid conflict
-                sum += a[x];
+            for (int k = i; x <= j; x++) {
+                sum += a[k];
             }
             ans = Math.max(ans, sum);
             i++;
