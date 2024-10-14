@@ -1,0 +1,9 @@
+public class Solution {
+    public int[] getDiagonal(int[][] A) {
+        int n = A.length; 
+        int[] diagonal = new int[n]; 
+        for (int i = 0; i < n; i++) {
+            diagonal[i] = A[i][i]; 
+        }
+        return diagonal; 
+    }
