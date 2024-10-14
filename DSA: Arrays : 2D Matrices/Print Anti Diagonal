@@ -1,0 +1,15 @@
+public class Solution {
+    public int[] anti(int[][] mat) {
+        int n = mat.length; 
+        int[] antiDiagonal = new int[n]; 
+        int i = 0; 
+        int j = n - 1; 
+        int index = 0; 
+        while (i < n) {
+            antiDiagonal[index] = mat[i][j]; 
+            i++; 
+            j--; 
+            index++; 
+        }
+        return antiDiagonal;
+    }
