@@ -1,0 +1,22 @@
+public class Solution {
+    public int solve(int[] A) {
+           Arrays.sort(A); 
+        reverseArray(A);
+        int ans = 0;
+        for (int i = 0; i < A.length; i++) {
+            ans += A[i] * (i + 1); 
+        }
+        return ans;
+    }
+    private void reverseArray(int[] A) {
+        int left = 0;
+        int right = A.length - 1;
+        while (left < right) {
+            int temp = A[left];
+            A[left] = A[right];
+            A[right] = temp;
+            left++;
+            right--;
+        }
+    }
+}
