@@ -1,0 +1,22 @@
+class HelloWorld {
+    public boolean rev(char[] a, int s, int e) {
+        while (s < e) {
+            if (a[s] != a[e]) { 
+                return false; 
+            }
+            s++;
+            e--;
+        }
+        return true;  
+    }
+
+    public static void main(String[] args) {
+        HelloWorld obj = new HelloWorld();
+        String testString = "abmadaml";
+        char[] arr = testString.toCharArray();
+        int start = 2;
+        int end = 6;
+        boolean result = obj.rev(arr, start, end);  
+        System.out.println(result);  
+    }
+}
