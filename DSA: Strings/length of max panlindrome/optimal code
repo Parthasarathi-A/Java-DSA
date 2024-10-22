@@ -1,0 +1,29 @@
+public class Solution {
+    public int longestPalindrome(String A) {
+        int ans = 0;
+        int n = A.length();  // Use A.length() instead of A.length
+        for (int c = 0; c < n; c++) {
+            int left = c;
+            int right = c;
+            while (left >= 0 && right < n) {  // Correct the condition to check right < n
+                if (A.charAt(left) != A.charAt(right)) {  // Use A.charAt() to access characters
+                    break;
+                }
+                left--;
+                right++;
+            }
+            ans = Math.max(ans, right - left - 1);
+            
+            left = c;
+            right = c + 1;
+            while (left >= 0 && right < n) {  // Correct the condition to check right < n
+                if (A.charAt(left) != A.charAt(right)) {  // Use A.charAt() to access characters
+                    break;
+                }
+                left--;
+                right++;
+            }
+            ans = Math.max(ans, right - left - 1);
+        }
+        return ans;
+    }
