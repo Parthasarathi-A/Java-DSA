@@ -1,0 +1,50 @@
+public class Solution {
+    public int solve(int a[]) {
+        int n = a.length;
+        int max = 0; 
+        int index = 0;
+        for (int i = 0; i < n; i++) {
+            int count = 0;
+            for (int j = 0; j < n; j++) {
+                if (a[i] == a[j]) {
+                    count++; 
+                }
+            }
+            if (count > max) {
+                max = count;
+                index = i;
+            }
+        }
+        if (max > n / 2) {
+            return a[index]; 
+        } 
+        else {
+            System.out.println("No majority element found");
+            return -1;  // Return -1 to indicate no majority element found
+        }
+    }
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        
+        // Test case 1
+        int[] arr1 = {1, 2, 3, 1, 1};
+        int result1 = solution.solve(arr1);
+        if (result1 != -1) {
+            System.out.println("Majority element is: " + result1);
+        }
+        
+        // Test case 2
+        int[] arr2 = {1, 2, 3, 4, 5};
+        int result2 = solution.solve(arr2);
+        if (result2 != -1) {
+            System.out.println("Majority element is: " + result2);
+        }
+        
+        // Test case 3
+        int[] arr3 = {3, 3, 4, 2, 3, 3, 3};
+        int result3 = solution.solve(arr3);
+        if (result3 != -1) {
+            System.out.println("Majority element is: " + result3);
+        }
+    }
+}
