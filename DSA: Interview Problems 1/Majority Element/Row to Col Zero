@@ -1,0 +1,73 @@
+public class Solution {
+    public int[][] solve(int a[][]) {
+        int n = a.length;    // Number of rows
+        int m = a[0].length; // Number of columns
+
+        // Step 1: Mark rows with zero
+        for (int i = 0; i < n; i++) {
+            int flag = 0;  // Use flag as an int as per your request
+            for (int j = 0; j < m; j++) {
+                if (a[i][j] == 0) {
+                    flag = 1;  // Set flag if a zero is found
+                }
+            }
+            if (flag == 1) {
+                for (int j = 0; j < m; j++) {
+                    if (a[i][j] != 0) {
+                        a[i][j] = -1;  // Mark non-zero elements as -1
+                    }
+                }
+            }
+        }
+
+        // Step 2: Mark columns with zero
+        for (int j = 0; j < m; j++) {
+            int flag = 0;  // Use flag as an int as per your request
+            for (int i = 0; i < n; i++) {
+                if (a[i][j] == 0) {
+                    flag = 1;  // Set flag if a zero is found
+                }
+            }
+            if (flag == 1) {
+                for (int i = 0; i < n; i++) {
+                    if (a[i][j] != 0) {
+                        a[i][j] = -1;  // Mark non-zero elements as -1
+                    }
+                }
+            }
+        }
+
+        // Step 3: Convert all -1 values to 0
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (a[i][j] == -1) {
+                    a[i][j] = 0;  // Set -1 to 0
+                }
+            }
+        }
+
+        return a;
+    }
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        
+        // Test case: Input matrix
+        int[][] matrix = {
+            {1, 2, 3},
+            {4, 0, 6},
+            {7, 8, 9}
+        };
+
+        // Calling the solve method
+        int[][] result = solution.solve(matrix);
+
+        // Printing the result matrix
+        System.out.println("Resultant matrix:");
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[0].length; j++) {
+                System.out.print(result[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
