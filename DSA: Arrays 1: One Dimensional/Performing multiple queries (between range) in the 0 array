@@ -1,0 +1,23 @@
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<Integer> A, ArrayList<ArrayList<Integer>> B) {
+        // First, update the values based on the ranges in B
+        for (int i = 0; i < B.size(); i++) {
+            int s = B.get(i).get(0);  // Start index
+            int e = B.get(i).get(1);  // End index
+            int val = B.get(i).get(2);  // Value to add
+            
+            A.set(s, A.get(s) + val);  // Add val to the start index
+            
+            if (e < A.size() - 1) {
+                A.set(e + 1, A.get(e + 1) - val);  // Subtract val from the element after the end index
+            }
+        }
+        
+        // Then, perform cumulative sum on the array
+        for (int i = 1; i < A.size(); i++) {
+            A.set(i, A.get(i - 1) + A.get(i));  // Add previous element to current element
+        }
+        
+        return A;
+    }
+}
