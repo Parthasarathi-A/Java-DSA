@@ -1,0 +1,18 @@
+public class HelloWorld {
+    public static int[] solve(int a[], int b[][]) {
+        int n = a.length;
+        
+        // First loop to apply the operations from b to a
+        for (int i = 0; i < b.length; i++) {
+            int index = b[i][0];  // Index to update in array a
+            int val = b[i][1];    // Value to add at the index
+            a[index] = a[index] + val;
+        }
+        
+        // Second loop to accumulate the values
+        for (int i = 1; i < n; i++) {
+            a[i] = a[i - 1] + a[i];
+        }
+        
+        return a;
+    }
