@@ -1,0 +1,36 @@
+class HelloWorld {
+    public static int solve(int a[]) {
+        int n = a.length;
+        int ans = 0;
+
+        // Loop through the array, skipping the first and last elements
+        for (int i = 1; i < n - 1; i++) {
+            // Find the maximum to the left of the current element
+            int maxl = 0;
+            for (int j = 0; j < i; j++) {
+                maxl = Math.max(maxl, a[j]);
+            }
+
+            // Find the maximum to the right of the current element
+            int maxr = 0;
+            for (int j = i + 1; j < n; j++) {
+                maxr = Math.max(maxr, a[j]);
+            }
+
+            // Calculate the amount of water that can be trapped at position i
+            int water = Math.min(maxl, maxr) - a[i];
+
+            // If water can be trapped, add it to the total
+            if (water > 0) {
+                ans += water;
+            }
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int[] a = {6, 2, 7};
+        int result = solve(a);
+        System.out.println("Total water trapped: " + result);
+    }
+}
