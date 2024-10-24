@@ -1,0 +1,35 @@
+public class HelloWorld {
+    public static void boundary(int a[][]) {
+        int N = a.length;
+        int r = 0;
+        int c = 0;
+        // Move right
+        while(N>1){
+            for (int i = 1; i < N; i++) {
+                System.out.print(a[r][c] + " ");
+                c++;
+            }
+            // Move down
+            for (int i = 1; i < N; i++) {
+                System.out.print(a[r][c] + " ");
+                r++;
+            }
+            // Move left
+            for (int i = 1; i < N; i++) {
+                System.out.print(a[r][c] + " ");
+                c--;
+            }
+            // Move up
+            for (int i = 1; i < N; i++) {
+                System.out.print(a[r][c] + " ");
+                r--;
+            }
+            N=N-2;
+            r=r+1;
+            c=c+1;
+            if(N==1){
+            System.out.print(a[r][c] + " ");
+            }
+        }
+    }
+}
