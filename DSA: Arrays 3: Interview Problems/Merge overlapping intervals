@@ -1,0 +1,29 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> solve(ArrayList<ArrayList<Integer>> A) {
+        int N = A.size();
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        int start_e = A.get(0).get(0);
+        int end_e = A.get(0).get(1);
+
+        for (int i = 1; i < N; i++) {
+            if (A.get(i).get(0) <= end_e) {
+                end_e = Math.max(A.get(i).get(1), end_e);
+            } else {
+                ArrayList<Integer> AL = new ArrayList<Integer>();
+                AL.add(start_e);
+                AL.add(end_e);
+                result.add(AL);
+                start_e = A.get(i).get(0);
+                end_e = A.get(i).get(1);
+            }
+        }
+        
+        ArrayList<Integer> AL = new ArrayList<Integer>();
+        AL.add(start_e);
+        AL.add(end_e);
+        result.add(AL);
+        
+        return result;
+        
+    }
+}
