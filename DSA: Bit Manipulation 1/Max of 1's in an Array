@@ -1,0 +1,29 @@
+public class Solution {
+    public List<Integer> frequent(int[] A) {
+        int max = 0;
+        List<Integer> res = new ArrayList<>();
+        
+        for (int i = 0; i < A.length; i++) {
+            int currentcount = numSetBits(A[i]); // Use numSetBits method
+            if (currentcount > max) {
+                max = currentcount;
+                res.clear();
+                res.add(i); 
+            } else if (currentcount == max) {
+                res.add(i); 
+            }
+        }
+        return res; 
+    }
+
+    public int numSetBits(int A) {
+        int count = 0;
+        while (A > 0) {
+            if ((A & 1) == 1) {
+                count++;
+            }
+            A = A >> 1; // Right shift A by 1
+        }
+        return count;
+    }
+}
