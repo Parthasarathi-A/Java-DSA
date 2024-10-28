@@ -1,0 +1,18 @@
+public class Solution {
+    public int singleNumber(final List<Integer> A) {
+        int ans = 0;
+        for (int i = 0; i < 32; i++) {
+            int count = 0;
+            for (int j = 0; j < A.size(); j++) {
+                int ele = A.get(j);
+                if ((ele & (1 << i)) != 0) {  // Check if i-th bit is set in ele
+                    count++;
+                }
+            }
+            if ((count & 1) == 1) {  // If count of i-th bit is odd, set it in ans
+                ans = ans | (1 << i);
+            }
+        }
+        return ans;
+    }
+}
