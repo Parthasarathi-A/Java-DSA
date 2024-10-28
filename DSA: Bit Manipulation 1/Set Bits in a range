@@ -1,0 +1,9 @@
+class HelloWorld {
+    public int solve(int A, int B, int C) {
+        int ans = 0;
+        for (int i = C; i < C + B; i++) {
+            ans = ans | (1 << i);
+        }
+        return ans;
+    }
+}
