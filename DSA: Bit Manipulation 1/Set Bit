@@ -1,0 +1,9 @@
+public class Solution {
+    public int solve(int A, int B) {
+        int num = 1<<A;
+        if(A!=B){
+            num+=1<<B;
+        }
+        return num;
+    }
+}
