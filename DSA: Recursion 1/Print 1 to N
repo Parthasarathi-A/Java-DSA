@@ -1,0 +1,14 @@
+public class Solution {
+    public void solve(int A) {
+        print1toA(A);
+        System.out.print("\n"); // Newline after printing numbers from 1 to A
+    }
+    
+    private void print1toA(int A) {
+        if (A == 0) {
+            return;
+        }
+        print1toA(A - 1); // Recursive call to print numbers from 1 to A-1
+        System.out.print(A + " ");
+    }
+}
