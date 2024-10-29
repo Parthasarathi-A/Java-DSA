@@ -1,0 +1,38 @@
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<Integer> A) {
+        int ans = 0;
+        ArrayList<Integer> candidates = new ArrayList<>(A);
+        
+        for (int i = 31; i >= 0; i--) {
+            int count = 0;
+            ArrayList<Integer> temp = new ArrayList<>();
+            
+            // Count how many numbers have the i-th bit set and keep them in temp
+            for (int j = 0; j < candidates.size(); j++) {
+                if ((candidates.get(j) & (1 << i)) != 0) {
+                    count++;
+                    temp.add(candidates.get(j));
+                }
+            }
+            
+            // Update ans if two or more numbers have the i-th bit set
+            if (count >= 2) {
+                ans |= (1 << i);
+                candidates = temp; // Update candidates to only those with the i-th bit set
+            }
+        }
+        
+        // Find the indices of the first two numbers in A that match the candidates
+        ArrayList<Integer> resultIndices = new ArrayList<>();
+        int found = 0;
+        
+        for (int i = 0; i < A.size() && found < 2; i++) {
+            if (A.get(i).equals(candidates.get(0)) || A.get(i).equals(candidates.get(1))) {
+                resultIndices.add(i);
+                found++;
+            }
+        }
+        
+        return resultIndices;
+    }
+}
