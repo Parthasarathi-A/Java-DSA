@@ -1,0 +1,18 @@
+public class Solution {
+    public void solve(int A) {
+        printDecreasingIncreasing(A);
+        System.out.print("\n"); // Newline after printing
+    }
+    private void printDecreasingIncreasing(int A) {
+        if (A == 0) {
+            return; // Base case
+        }
+        
+        // Print decreasing part
+        System.out.print(A + " ");
+        printDecreasingIncreasing(A - 1); // Recursive call for decreasing
+       
+        // Print increasing part
+        System.out.print(A + " ");
+    }
+}
