@@ -1,0 +1,25 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+        int ans = 0;  // Initialize ans to store the maximum AND result
+        int n = A.size();
+
+        // Iterate from the highest bit to the lowest bit
+        for (int bit = 31; bit >= 0; bit--) {
+            int count = 0;
+
+            // Check if there are at least two numbers that can have the current bit set in ans
+            for (int i = 0; i < n; i++) {
+                if ((A.get(i) & (ans | (1 << bit))) == (ans | (1 << bit))) {
+                    count++;
+                }
+            }
+            
+            // If count of numbers with the current bit set is at least 2, set this bit in ans
+            if (count >= 2) {
+                ans |= (1 << bit);
+            }
+        }
+        
+        return ans;
+    }
+}
