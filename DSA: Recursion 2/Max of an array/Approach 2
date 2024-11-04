@@ -1,0 +1,9 @@
+public class Solution {
+    public int findmax(ArrayList<Integer> A, int index, int max) {
+        int N = A.size();
+        if (index == N) {
+            return max;
+        }
+        return findmax(A, index + 1, Math.max(A.get(index), max));
+    }
+}
