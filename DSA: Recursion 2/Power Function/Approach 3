@@ -1,0 +1,14 @@
+public class Solution {
+    public int pow(int A, int N) {
+        if(N == 0) {
+            return 1;
+        }
+        int P=pow(A,N/2);
+        if(N%2==0){
+         return P*P;
+        }
+        else{
+            return P*P*A;
+        }
+    }
+}
