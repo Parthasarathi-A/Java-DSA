@@ -1,0 +1,8 @@
+public class Solution {
+    public int pow(int A, int N) {
+        if(N == 0) {
+            return 1;
+        }
+        return (A * pow(A, N - 1));
+    }
+}
