@@ -1,0 +1,10 @@
+public class Solution {
+    public void PrintArray(ArrayList<Integer> A, int index) {
+        int N = A.size();
+        if (index == N) {
+            return;
+        }
+        System.out.print(A.get(index) + " ");
+        PrintArray(A, index + 1);
+    }
+}
