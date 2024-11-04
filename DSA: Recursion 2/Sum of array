@@ -1,0 +1,9 @@
+public class Solution {
+    public int findsum(ArrayList<Integer> A, int index) {
+        int N = A.size();
+        if (index == N) {
+            return 0;
+        }
+        return A.get(index) + findsum(A, index + 1);
+    }
+}
