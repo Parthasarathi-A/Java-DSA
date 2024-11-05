@@ -1,0 +1,19 @@
+public class HelloWorld {
+
+    // Recursive method to find all indices where A[index] == B
+    public int[] recur(int[] A, int B, int index, int count) {
+        // Base case: when index reaches the length of the array
+        if (index == A.length) {
+            return new int[count]; // Return an array of size 'count' if no more elements to check
+        }
+
+        // If the element at current index matches B
+        if (A[index] == B) {
+            int[] ans = recur(A, B, index + 1, count + 1); // Recursive call with incremented count
+            ans[count] = index; // Store the current index in the array at the appropriate position
+            return ans;
+        } else {
+            return recur(A, B, index + 1, count); // Continue to the next index without changing the count
+        }
+    }
+}
