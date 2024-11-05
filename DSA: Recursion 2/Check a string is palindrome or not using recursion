@@ -1,0 +1,16 @@
+public class Solution {
+    public boolean pali(String A,int l,int r){
+        if(l>=r){
+            return true;
+        }
+        return (A.charAt(l)==A.charAt(r)&&pali(A,l+1,r-1));
+    }
+    public int solve(String A) {
+        int l = 0;
+        int r = A.length()-1;
+        if(pali(A,l,r)){
+            return 1;
+        }
+        return 0;
+    }
+}
