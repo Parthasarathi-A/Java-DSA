@@ -1,0 +1,18 @@
+public class Solution {
+    public ArrayList<Integer> allIndices(ArrayList<Integer> A, int B) {
+        return allIndices(A, B, 0, new ArrayList<Integer>());
+    }
+    private ArrayList<Integer> allIndices(ArrayList<Integer> A, int B, int index, ArrayList<Integer> result) {
+        if (index == A.size()) {
+            return result;
+        }
+
+        // If element matches B, add the index to the result list
+        if (A.get(index) == B) {
+            result.add(index);
+        }
+
+        // Recursive call with the next index
+        return allIndices(A, B, index + 1, result);
+    }
+}
