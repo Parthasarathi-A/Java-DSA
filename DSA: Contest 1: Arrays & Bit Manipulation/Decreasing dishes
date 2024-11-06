@@ -1,0 +1,16 @@
+public class HelloWorld {
+    public int solve(int A[]) {
+        int n = A.length;
+        int ans = A[0];
+        int temp = A[0];
+        for (int i = 1; i < n; i++) {
+            if (A[i] < A[i - 1]) {
+                temp += A[i];
+            } else {
+                temp = A[i];
+            }
+            ans = Math.max(temp, ans);  
+        }
+        return ans;
+    }
+}
