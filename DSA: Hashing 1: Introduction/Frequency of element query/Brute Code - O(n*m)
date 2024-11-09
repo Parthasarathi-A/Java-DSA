@@ -1,0 +1,15 @@
+public class FrequencyFinder {
+    public static int[] findFrequency(int[] arr, int[] queries) {
+       int freq[]=new int[queries.length];
+       for(int i=0;i<queries.length;i++){
+           int count=0;
+           for(int j=0;j<arr.length;j++){
+               if(arr[j]==queries[i]){
+                   count++;
+               }
+           }
+           freq[i]=count;
+       }
+       return freq;
+    }
+}
