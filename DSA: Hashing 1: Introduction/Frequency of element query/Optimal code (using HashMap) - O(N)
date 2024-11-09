@@ -1,0 +1,38 @@
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<Integer> A, ArrayList<Integer> B) {
+        // Create a HashMap to store the frequency of elements in A
+        HashMap<Integer, Integer> mp = new HashMap<>();
+        
+        // Initialize the result list
+        ArrayList<Integer> result = new ArrayList<>();
+        
+        // Size of the input arrays
+        int n = A.size();
+        int q = B.size();
+        
+        // Populate the HashMap with frequency counts from array A
+        for (int i = 0; i < n; i++) {
+            if (mp.containsKey(A.get(i)) == true) {
+                int x = mp.get(A.get(i));
+                mp.put(A.get(i), x + 1);
+            } 
+            else {
+                mp.put(A.get(i), 1);
+            }
+        }
+        
+        // Process each query in array B
+        for (int i = 0; i < q; i++) {
+            if (mp.containsKey(B.get(i)) == true) {
+                int x = mp.get(B.get(i));
+                result.add(x); // Add the frequency count to the result
+            } 
+            else {
+                result.add(0); // Add 0 if the element is not found
+            }
+        }
+        
+        // Return the result list
+        return result;
+    }
+}
