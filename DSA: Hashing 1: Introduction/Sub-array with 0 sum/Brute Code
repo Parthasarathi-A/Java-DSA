@@ -1,0 +1,21 @@
+public class HelloWorld {
+    public static boolean hasSubarrayWithZeroSum(int[] a) {
+        int n = a.length;
+        
+        // Check each subarray starting from index i
+        for (int i = 0; i < n; i++) {
+            int sum = 0;
+            
+            // Calculate sum of subarray starting from i to j
+            for (int j = i; j < n; j++) {
+                sum += a[j];
+                
+                // If the sum of the subarray is zero, return true
+                if (sum == 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
