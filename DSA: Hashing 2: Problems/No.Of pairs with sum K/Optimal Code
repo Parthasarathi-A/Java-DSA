@@ -1,0 +1,16 @@
+public class sol {
+    public int solve(int A, ArrayList<Integer> B) {
+        int n = B.size();
+        HashSet<Integer> hs = new HashSet<>();
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (hs.contains(A - B.get(i))) {
+                count++;
+            } 
+            else{
+                hs.add(B.get(i));
+            }
+        }
+        return count;
+    }
+}
