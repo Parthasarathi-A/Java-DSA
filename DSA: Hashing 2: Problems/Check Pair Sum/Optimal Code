@@ -1,0 +1,15 @@
+public class Solution {
+    public int solve(int A, ArrayList<Integer> B) {
+        int n = B.size();
+        HashSet<Integer> hs = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            if (hs.contains(A - B.get(i))) {
+                return 1;
+            } 
+            else {
+                hs.add(B.get(i));
+            }
+        }
+        return 0;
+    }
+}
