@@ -1,0 +1,35 @@
+import java.util.HashSet;
+
+public class Main {
+    public static boolean solve(int[] a, int k) {
+        int n = a.length;
+        int p = 0;
+        HashSet<Integer> hs = new HashSet<>();
+        
+        // Add initial prefix sum of 0
+        hs.add(0);  
+        
+        for (int i = 0; i < n; i++) {
+            
+            // Calculate prefix sum
+            p += a[i];  
+            
+            // Check if (prefix sum - k) exists in HashSet
+            if (hs.contains(p - k)) {  
+                return true;
+            }
+            
+            // Add current prefix sum to HashSet
+            hs.add(p);  
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        int[] a = {1, 2, 3, 4, 5};
+        int k = 9;
+
+        boolean result = solve(a, k);
+        System.out.println(result);  // Output will be true if a subarray sum equals k, otherwise false
+    }
+}
