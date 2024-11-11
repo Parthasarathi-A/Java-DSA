@@ -1,0 +1,21 @@
+public class Main {
+    public static int[] solve(int[] a, int b) {
+        int n = a.length;
+        int[] result = new int[n - b + 1];  // Array to store unique counts for each subarray
+        HashSet<Integer> hs = new HashSet<>();
+
+        // Iterate over subarrays of length `b`
+        for (int i = 0; i <= n - b; i++) {
+            hs.clear();  // Clear HashSet for each subarray
+            
+            // Add elements of the current subarray to the HashSet
+            for (int j = i; j < i + b; j++) {
+                hs.add(a[j]);
+            }
+            
+            // Store the size of unique elements for the current subarray
+            result[i] = hs.size();
+        }
+        return result;  // Return the array of unique counts for all subarrays of length `b`
+    }
+}
