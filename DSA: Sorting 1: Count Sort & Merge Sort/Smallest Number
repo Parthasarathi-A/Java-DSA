@@ -1,0 +1,16 @@
+public class Solution {
+    public ArrayList<Integer> smallestNumber(ArrayList<Integer> A) {
+        int[] fre = new int[10];
+        for (int i = 0; i < A.size(); i++) {
+            fre[A.get(i)]++;
+        }
+        int k = 0;
+        for (int d = 0; d <= 9; d++) {
+            for (int i = 1; i <= fre[d]; i++) {
+                A.set(k, d);
+                k++;
+            }
+        }
+        return A;
+    }
+}
