@@ -1,0 +1,26 @@
+public class Solution {
+    public ArrayList<Integer> solve(final List<Integer> A, final List<Integer> B) {
+        int n = A.size() + B.size();
+        ArrayList<Integer> res = new ArrayList<>(n);
+        
+        int e = 0, o = 0;
+        while (e < A.size() && o < B.size()) {
+            if (A.get(e) < B.get(o)) {
+                res.add(A.get(e));
+                e++;
+            } else {
+                res.add(B.get(o));
+                o++;
+            }
+        }
+        while (e < A.size()) {
+            res.add(A.get(e));
+            e++;
+        }
+        while (o < B.size()) {
+            res.add(B.get(o));
+            o++;
+        }
+        return res;
+    }
+}
