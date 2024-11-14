@@ -1,0 +1,72 @@
+public class Main {
+    public ArrayList<Integer> solve(final List<Integer> A) {
+        int n = A.size();
+        int e = 0, o = 0, a = 0;
+        ArrayList<Integer> even = new ArrayList<>();
+        ArrayList<Integer> odd = new ArrayList<>();
+
+        // Keep this part exactly as specified
+        while (a < n) {
+            if (A.get(a) % 2 == 0) {
+                even.add(A.get(a));
+                e++;
+            } else {
+                odd.add(A.get(a));
+                o++;
+            }
+            a++;
+        }
+
+        // Merge even and odd lists in the specified manner
+        ArrayList<Integer> result = new ArrayList<>();
+        e = 0;
+        o = 0;
+
+        while (e < even.size() && o < odd.size()) {
+            if (even.get(e) < odd.get(o)) {
+                result.add(even.get(e));
+                e++;
+            } else {
+                result.add(odd.get(o));
+                o++;
+            }
+        }
+
+        while (e < even.size()) {
+            result.add(even.get(e));
+            e++;
+        }
+
+        while (o < odd.size()) {
+            result.add(odd.get(o));
+            o++;
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Main main = new Main();
+        List<Integer> input = Arrays.asList(3, 5, 1, -4, 1, 0);
+        
+        ArrayList<Integer> sortedResult = main.solve(input);
+        
+        System.out.println("Sorted Result: " + sortedResult);
+    }
+}
+
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        
+        // Sample input lists
+        List<Integer> A = Arrays.asList(1, 3, 5, 7);
+        List<Integer> B = Arrays.asList(2, 4, 6, 8);
+        
+        // Merging lists using the solve function
+        ArrayList<Integer> result = solution.solve(A, B);
+        
+        // Display the merged list
+        System.out.println("Merged list: " + result);
+    }
+}
