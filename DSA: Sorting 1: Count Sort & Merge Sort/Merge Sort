@@ -1,0 +1,71 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Main {
+    // Sort function that calls mergeSort
+    public ArrayList<Integer> solve(ArrayList<Integer> A) {
+        int l = 0;
+        int r = A.size() - 1;
+        ArrayList<Integer> res = new ArrayList<>(A.size());
+        mergeSort(A, res, l, r); // Call with directly initialized l and r
+        return res;
+    }
+
+    // Main merge sort function
+    private void mergeSort(ArrayList<Integer> A, ArrayList<Integer> res, int l, int r) {
+        // If there's only one element in the range, return the original array
+        if (l == r) {
+            res.add(A.get(l));
+            return;
+        }
+
+        if (l < r) {
+            int mid = (l + r) / 2;
+
+            // Recursively sort the two halves
+            mergeSort(A, res, l, mid);
+            mergeSort(A, res, mid + 1, r);
+
+            // Merge the sorted halves into res
+            merge(A, res, l, mid, r);
+        }
+    }
+
+    // Merge function
+    private void merge(ArrayList<Integer> A, ArrayList<Integer> res, int l, int mid, int r) {
+        ArrayList<Integer> B = new ArrayList<>(A.subList(l, mid + 1));
+        ArrayList<Integer> C = new ArrayList<>(A.subList(mid + 1, r + 1));
+
+        int e = 0, o = 0;
+        while (e < B.size() && o < C.size()) {
+            if (B.get(e) <= C.get(o)) {
+                res.add(B.get(e));
+                e++;
+            } else {
+                res.add(C.get(o));
+                o++;
+            }
+        }
+
+        while (e < B.size()) {
+            res.add(B.get(e));
+            e++;
+        }
+        while (o < C.size()) {
+            res.add(C.get(o));
+            o++;
+        }
+    }
+
+    // Main function to test solve
+    public static void main(String[] args) {
+        Main main = new Main();
+        ArrayList<Integer> input = new ArrayList<>(Arrays.asList(38, 27, 43, 3, 9, 82, 10));
+
+        System.out.println("Original Array: " + input);
+
+        ArrayList<Integer> sortedArray = main.solve(input);
+
+        System.out.println("Sorted Array: " + sortedArray);
+    }
+}
