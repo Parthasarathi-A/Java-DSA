@@ -1,0 +1,47 @@
+import java.util.Arrays;
+
+public class Main {
+    public static int solve(int a[], int b[]) {
+        // Sort both arrays
+        Arrays.sort(a);
+        Arrays.sort(b);
+
+        int n = a.length;
+        int m = b.length;
+        int[] c = new int[n + m]; // Array to store merged elements
+
+        int p1 = 0, p2 = 0, p3 = 0; // Pointers for a, b, and c arrays
+        int count = 0;
+
+        // Merge process with counting based on the condition
+        while (p1 < n && p2 < m) {
+            if (b[p2] < a[p1]) {
+                // b[p2] is less than all elements in a from p1 onwards
+                count += (n - p1); // Add the remaining elements in a
+                c[p3++] = b[p2++]; // Add b[p2] to merged array and move pointer
+            } else {
+                c[p3++] = a[p1++]; // Add a[p1] to merged array and move pointer
+            }
+        }
+
+        // Add remaining elements of a, if any
+        while (p1 < n) {
+            c[p3++] = a[p1++];
+        }
+
+        // Add remaining elements of b, if any
+        while (p2 < m) {
+            c[p3++] = b[p2++];
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int[] a = {7, 3, 5};
+        int[] b = {2, 0, 6};
+
+        int result = solve(a, b);
+        System.out.println("Number of pairs where elements of a are greater than elements of b: " + result);
+    }
+}
