@@ -1,0 +1,72 @@
+import java.util.ArrayList;
+
+public class Main {
+  
+    public int solve(ArrayList<Integer> A) {
+        return mergeSort(A, 0, A.size() - 1);
+    }
+
+    private int mergeSort(ArrayList<Integer> A, int l, int r) {
+        int inv_count = 0;
+        if (l < r) {
+            int mid = (l + r) / 2;
+            inv_count += mergeSort(A, l, mid);
+            inv_count += mergeSort(A, mid + 1, r);
+            inv_count += merge(A, l, mid, r);
+        }
+        return inv_count;
+    }
+
+    private int merge(ArrayList<Integer> A, int l, int mid, int r) {
+        int n1 = mid - l + 1;
+        int n2 = r - mid;
+        ArrayList<Integer> B = new ArrayList<>(n1);
+        ArrayList<Integer> C = new ArrayList<>(n2);
+
+        for (int i = 0; i < n1; i++) {
+            B.add(A.get(l + i));
+        }
+        for (int i = 0; i < n2; i++) {
+            C.add(A.get(mid + 1 + i));
+        }
+
+        int i = 0, j = 0, index = l, inv_count = 0;
+        while (i < n1 && j < n2) {
+            if (B.get(i) <= C.get(j)) {
+                A.set(index, B.get(i));
+                i++;
+            } else {
+                A.set(index, C.get(j));
+                j++;
+                inv_count += (n1 - i); // Count inversions
+            }
+            index++;
+        }
+
+        while (i < n1) {
+            A.set(index, B.get(i));
+            i++;
+            index++;
+        }
+
+        while (j < n2) {
+            A.set(index, C.get(j));
+            j++;
+            index++;
+        }
+        return inv_count;
+    }
+
+    public static void main(String[] args) {
+        Main mmain = new Main();
+        ArrayList<Integer> A = new ArrayList<>();
+        A.add(5);
+        A.add(2);
+        A.add(6);
+        A.add(1);
+    
+        int result = mmain.solve(A);
+        System.out.println("Sorted Array: " + A);
+        System.out.println("Inversion Count: " + result);
+    }
+}
