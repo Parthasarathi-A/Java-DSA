@@ -1,0 +1,67 @@
+import java.util.*;
+
+public class Main {
+
+    // Partition method to divide the array into two parts and place pivot in the correct position
+    public static void partition(int[] arr, int low, int high) {
+        int pivot = arr[low]; // Pivot element is the first element in the range
+        int l = low + 1; // Left pointer starts after the pivot
+        int r = high; // Right pointer starts from the end
+
+        while (l <= r) {
+            // Move left pointer to the right while arr[l] <= pivot
+            while (l <= high && arr[l] <= pivot) {
+                l++;
+            }
+            // Move right pointer to the left while arr[r] > pivot
+            while (arr[r] > pivot) {
+                r--;
+            }
+
+            // Swap elements at left and right pointers if left is still less than or equal to right
+            if (l < r) {
+                int temp = arr[l];
+                arr[l] = arr[r];
+                arr[r] = temp;
+            }
+        }
+
+        // Swap the pivot with arr[r] to place it in the correct position
+        int temp = arr[low];
+        arr[low] = arr[r];
+        arr[r] = temp;
+    }
+
+    // QuickSort method to recursively sort the subarrays
+    public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            // Call the partition method to rearrange elements around the pivot
+            partition(arr, low, high);
+
+            // Recursively sort the left and right subarrays
+            quickSort(arr, low, high - 1); // Left subarray
+            quickSort(arr, high + 1, high); // Right subarray
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {54, 26, 93, 17, 54, 77, 31, 44, 55, 20};
+
+        System.out.println("Array before quicksort: ");
+        printArray(arr);
+
+        // Call quickSort on the entire array
+        quickSort(arr, 0, arr.length - 1);
+
+        System.out.println("Array after quicksort: ");
+        printArray(arr);
+    }
+
+    // Utility function to print the array
+    public static void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}
