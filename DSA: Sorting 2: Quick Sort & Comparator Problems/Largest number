@@ -1,0 +1,41 @@
+import java.util.*;
+
+public class Main {
+    public String large(ArrayList<Integer> A) {
+        // Sort the list based on the custom comparator
+        Collections.sort(A, new Comparator<Integer>() {
+            public int compare(Integer a, Integer b) {
+                String x = String.valueOf(a) + String.valueOf(b);
+                String y = String.valueOf(b) + String.valueOf(a);
+                if (x.compareTo(y) > 0) {
+                    return -1; // x should come before y
+                } else {
+                    return 1; // y should come before x
+                }
+            }
+        });
+
+        // Build the result as a string
+        StringBuilder ans = new StringBuilder();
+        for (int i : A) {
+            ans.append(String.valueOf(i));
+        }
+
+        // Handle the case of leading zeros (e.g., [0, 0])
+        if (ans.charAt(0) == '0') {
+            return "0";
+        }
+        return ans.toString();
+    }
+
+    public static void main(String[] args) {
+        Main main = new Main();
+        
+        // Input ArrayList
+        ArrayList<Integer> A = new ArrayList<>(Arrays.asList(1, 20));
+        
+        // Call the large function and print the result
+        String result = main.large(A);
+        System.out.println("Largest number formed: " + result);
+    }
+}
