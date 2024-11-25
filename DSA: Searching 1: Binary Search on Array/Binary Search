@@ -1,0 +1,33 @@
+import java.util.*;
+public class Main {
+    public int search(int[] a, int target) {
+        int n = a.length;
+        int l = 0;
+        int h = n - 1;
+        while (l <= h) {
+            int mid = l + (h - l) / 2;
+            if (a[mid] == target) {
+                return mid;
+            } else if (a[mid] < target) {
+                l = mid + 1;
+            } else {
+                h = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        Main obj = new Main();
+        int[] array = {2, 4, 7, 10, 14, 20};
+        int target = 10;
+
+        int result = obj.search(array, target);
+
+        if (result != -1) {
+            System.out.println("Target found at index: " + result);
+        } else {
+            System.out.println("Target not found in the array.");
+        }
+    }
+}
