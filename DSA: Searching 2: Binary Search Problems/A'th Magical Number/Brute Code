@@ -1,0 +1,21 @@
+import java.util.*;
+public class Main {
+    public static int solve(int a, int b, int c) {
+        int count = 0; 
+        int number = 1; 
+        while (count < a) { 
+            if (number % b == 0 || number % c == 0) {
+                count++;
+            }
+            number++;
+        }
+        return number - 1; 
+    }
+       
+    public static void main(String[] args) {
+        int a = 4;
+        int b = 2;
+        int c = 3;
+        System.out.println(solve(a, b, c)); 
+    }
+}
