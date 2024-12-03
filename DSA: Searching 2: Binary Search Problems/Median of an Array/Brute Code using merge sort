@@ -1,0 +1,53 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    // Method to find the median of two sorted arrays
+    public double findMedian(final List<Integer> A, final List<Integer> B) {
+        int n = A.size() + B.size();
+        ArrayList<Integer> merged = new ArrayList<>(n);
+        
+        int e = 0, o = 0;
+        
+        // Merge two sorted arrays
+        while (e < A.size() && o < B.size()) {
+            if (A.get(e) < B.get(o)) {
+                merged.add(A.get(e));
+                e++;
+            } else {
+                merged.add(B.get(o));
+                o++;
+            }
+        }
+        
+        while (e < A.size()) {
+            merged.add(A.get(e));
+            e++;
+        }
+        
+        while (o < B.size()) {
+            merged.add(B.get(o));
+            o++;
+        }
+        
+        // Find the median from the merged array
+        int mid = n / 2;
+        
+        if (n % 2 == 1) {
+            // If the total length is odd, return the middle element
+            return merged.get(mid);
+        } else {
+            // If the total length is even, return the average of the two middle elements
+            return (merged.get(mid - 1) + merged.get(mid)) / 2.0;
+        }
+    }
+
+    // Main method to test the solution
+    public static void main(String[] args) {
+        Main main = new Main();
+        
+        List<Integer> A2 = List.of(1, 2);
+        List<Integer> B2 = List.of(3, 4, 5, 6);
+        System.out.println("Median: " + main.findMedian(A2, B2));
+    }
+}
