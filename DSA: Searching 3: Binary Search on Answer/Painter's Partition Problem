@@ -1,0 +1,69 @@
+import java.util.*;
+public class Main {
+
+    public int paint(int[] A, int B, int K) {
+        int n = A.length;
+        int l = maxele(A, n); // Find the maximum element in the array
+        int r = sumarr(A, n); // Find the sum of the array elements
+        
+        long result = r;
+        while (l <= r) {
+            long mid = l + (r - l) / 2;
+            if (canPaint(A, n, B, mid)) {
+                result = mid;
+                r = (int)mid - 1;
+            } 
+            else {
+                l = (int)mid + 1;
+            }
+        }
+        
+        return (int)((result * K) % 10000003);
+    }
+
+    private boolean canPaint(int[] A, int n, int B, long mid) {
+        int painters = 1;
+        long total = 0;
+        
+        for (int i = 0; i < n; i++) {
+            total += A[i];
+            if (total > mid) {
+                total = A[i];
+                painters++;
+            }
+        }
+        if(painters<=B){
+            return true;
+        }
+        return false;
+    }
+
+    private int maxele(int[] A, int n) {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            max = Math.max(max, A[i]);
+        }
+        return max;
+    }
+
+    private int sumarr(int[] A, int n) {
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += A[i];
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        Main main = new Main();
+        
+        // Example input
+        int[] A = {3,5,1,7,8,2,5,3,10,1,4,7,5,4,6};  // Board lengths
+        int B = 4;          // Number of painters
+        int K = 1;          // Time per unit length
+        
+        // Calculate and print result
+        int result = main.paint(A, B, K);
+        System.out.println("The minimum time to paint all boards is: " + result);
+    }
+}
