@@ -1,0 +1,28 @@
+public class Solution {
+    public ListNode solve(ListNode A, int X) {
+        // If the list is empty, return it as is
+        if (A == null) {
+            return A;
+        }
+
+        // Handle the case where the head node contains X
+        while (A != null && A.data == X) {
+            A = A.next;  // Skip the node that contains X
+        }
+
+        // Initialize the current node to traverse the list
+        ListNode temp = A;
+
+        // Traverse the list to remove all occurrences of X
+        while (temp != null && temp.next != null) {
+            if (temp.next.data == X) {
+                temp.next = temp.next.next;  // Skip over the node to delete it
+            } 
+            else {
+                temp = temp.next;  // Move to the next node if no deletion
+            }
+        }
+
+        return A;  // Return the updated list
+    }
+}
