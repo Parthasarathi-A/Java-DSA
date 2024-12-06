@@ -1,0 +1,39 @@
+public class Solution {
+    public ListNode solve(ListNode A, int B, int C) {
+        // Create a new node with value B
+        ListNode newNode = new ListNode(B);
+
+        // If C == 0, insert at the beginning of the list
+        if (C == 0) {
+            newNode.next = A;
+            return newNode;  // Return the new node as the new head of the list
+        }
+
+        // Start with the head of the list
+        ListNode temp = A;
+        int currentIndex = 0;
+
+        // Traverse the list to find the (C-1)-th node
+        while (temp != null && currentIndex < C - 1) {
+            temp = temp.next;  // Move to the next node
+            currentIndex++;  // Increment the index
+        }
+
+        // If temp is null, it means C is out of bounds, so we append the new node at the end
+        if (temp == null) {
+            // Find the last node and insert the new node at the end
+            ListNode last = A;
+            while (last != null && last.next != null) {
+                last = last.next;
+            }
+            last.next = newNode;  // Append the new node at the end
+            return A;  // Return the head of the list
+        }
+
+        // Insert the new node at position C
+        newNode.next = temp.next;  // Point the new node to the next node of temp (if any)
+        temp.next = newNode;  // Link temp node to the new node
+
+        return A;  // Return the head of the list
+    }
+}
