@@ -1,0 +1,27 @@
+public class Solution {
+    public ListNode solve(ListNode A, int X) {
+        // If the list is empty, return it as is
+        if (A == null) {
+            return A;
+        }
+
+        // If the first node contains X, remove it
+        if (A.data == X) {
+            A = A.next;  // Move the head to the next node
+            return A;  // Return the new head
+        }
+
+        ListNode temp = A;
+        
+        // Traverse the list to find the node with value X
+        while (temp != null && temp.next != null) {
+            if (temp.next.data == X) {
+                temp.next = temp.next.next;  // Skip over the node to delete it
+                return A;  // Return the updated list
+            }
+            temp = temp.next;
+        }
+
+        return A;  // Return the list unchanged if X is not found
+    }
+}
