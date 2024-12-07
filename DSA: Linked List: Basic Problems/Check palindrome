@@ -1,0 +1,39 @@
+public class Solution {
+    public int lPalin(ListNode A) {
+        // Step 1: Find the length of the linked list
+        int n = 0;
+        ListNode temp = A;
+        while (temp != null) {
+            n++;
+            temp = temp.next;
+        }
+
+        // Step 2: Find the middle node
+        int mid = ((n + 1)/ 2) + 1;
+        temp = A;
+        for (int i = 1; i < mid; i++) {
+            temp = temp.next;
+        }
+
+        // Step 3: Reverse the second half of the linked list
+        ListNode prev = null, current = temp, next = null;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        // Step 4: Compare the first half and the reversed second half
+        ListNode firstHalf = A, secondHalf = prev;
+        for (int i = 0; i < n / 2; i++) {
+            if (firstHalf.val != secondHalf.val) {
+                return 0; // Not a palindrome
+            }
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
+        }
+
+        return 1; // Palindrome
+    }
+}
