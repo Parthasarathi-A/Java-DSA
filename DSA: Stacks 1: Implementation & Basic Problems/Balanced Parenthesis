@@ -1,0 +1,22 @@
+public class Solution {
+    public int solve(String A) {
+        int N = A.length();
+        Stack<Character> s = new Stack<>();
+        for (int i = 0; i < N; i++) {
+            char ch = A.charAt(i);
+            if (ch == '{' || ch == '[' || ch == '(') {
+                s.push(ch);
+            } else if ((ch == '}' || ch == ']' || ch == ')') && !s.isEmpty()) {
+                char top = s.peek();
+                if ((ch == '}' && top == '{') || (ch == ']' && top == '[') || (ch == ')' && top == '(')) {
+                    s.pop();
+                } else {
+                    return 0; // Mismatched parentheses
+                }
+            } else {
+                return 0; // Unmatched closing bracket
+            }
+        }
+        return s.isEmpty() ? 1 : 0; // Return 1 if balanced, otherwise 0
+    }
+}
