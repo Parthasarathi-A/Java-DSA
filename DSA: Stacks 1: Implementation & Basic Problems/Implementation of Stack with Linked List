@@ -1,0 +1,61 @@
+class Stack {
+    // Node class representing each element in the stack
+    private class Node {
+        int data; // Data of the node
+        Node next; // Reference to the next node
+
+        // Constructor for the Node
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    private Node top; // Points to the top node of the stack
+
+    // Constructor to initialize the stack
+    public Stack() {
+        top = null; // Stack is initially empty
+    }
+
+    // Method to add an element to the stack
+    public void push(int element) {
+        Node newNode = new Node(element); // Create a new node
+        newNode.next = top; // Link the new node to the previous top
+        top = newNode; // Make the new node the top of the stack
+    }
+
+    // Method to remove and return the top element from the stack
+    public int pop() {
+        if (isEmpty()) {
+            return -1; // Return -1 if the stack is empty
+        }
+        int poppedValue = top.data; // Get the top value
+        top = top.next; // Move the top pointer to the next node
+        return poppedValue;
+    }
+
+    // Method to return the top element without removing it
+    public int top() {
+        if (isEmpty()) {
+            return -1; // Return -1 if the stack is empty
+        }
+        return top.data; // Return the top element
+    }
+
+    // Method to check if the stack is empty
+    public boolean isEmpty() {
+        return top == null; // If top is null, the stack is empty
+    }
+
+    // Method to return the size of the stack
+    public int size() {
+        int size = 0;
+        Node current = top;
+        while (current != null) {
+            size++;
+            current = current.next; // Move to the next node
+        }
+        return size;
+    }
+}
