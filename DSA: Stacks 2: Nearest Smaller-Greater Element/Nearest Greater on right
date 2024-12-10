@@ -1,0 +1,39 @@
+import java.util.*;
+
+public class Main {
+    public static int[] solve(int a[]) {
+        int n = a.length;
+        int res[] = new int[n]; // Result array to store indices
+        Stack<Integer> stack = new Stack<>(); // Stack to store indices of elements
+        
+        for (int i = n-1; i >= 0; i--) {
+            // Pop elements from the stack until we find a smaller element
+            while (!stack.isEmpty() && a[stack.peek()] <= a[i]) {
+                stack.pop();
+            }
+            
+            // If the stack is empty, no smaller element exists to the left
+            if (stack.isEmpty()) {
+                res[i] = -1;
+            } 
+            else {
+                res[i] = stack.peek(); // Top of the stack is the nearest smaller element
+            }
+            
+            // Push the current element's index onto the stack
+            stack.push(i);
+        }
+        
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int a[] = {3, 2, 6, 5, 8, 7, 9}; // Example input array
+        int result[] = solve(a);   // Call solve method to get the result array
+        
+        // Print the result array
+        for (int i = 0; i < result.length; i++) {
+            System.out.print(result[i] + " ");
+        }
+    }
+}
