@@ -1,0 +1,47 @@
+public class Solution {
+    public int largestRectangleArea(int[] A) {
+        int N = A.length;
+        int left_near_small[] = new int[N];
+        int right_near_small[] = new int[N];
+        Stack<Integer> st = new Stack<>();
+
+        // Compute left nearest smaller elements
+        for (int i = 0; i < N; i++) {
+            while (!st.isEmpty() && A[i] <= A[st.peek()]) {
+                st.pop();
+            }
+            if (!st.isEmpty()) {
+                left_near_small[i] = st.peek();
+            } else {
+                left_near_small[i] = -1; // Explicitly set -1 when stack is empty
+            }
+            st.push(i);
+        }
+
+        st.clear(); // Clear the stack instead of redeclaring
+
+        // Compute right nearest smaller elements
+        for (int i = N - 1; i >= 0; i--) {
+            while (!st.isEmpty() && A[i] <= A[st.peek()]) {
+                st.pop();
+            }
+            if (!st.isEmpty()) {
+                right_near_small[i] = st.peek();
+            } else {
+                right_near_small[i] = N; // Explicitly set N when stack is empty
+            }
+            st.push(i);
+        }
+
+        int max_area = Integer.MIN_VALUE;
+        for (int i = 0; i < N; i++) {
+            int h = A[i];
+            int p1 = left_near_small[i];
+            int p2 = right_near_small[i];
+            int w = p2 - p1 - 1;
+            int area = h * w;
+            max_area = Math.max(area, max_area);
+        }
+        return max_area;
+    }
+}
