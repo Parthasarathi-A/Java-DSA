@@ -1,0 +1,32 @@
+import java.util.*;
+public class Main {
+    public static int solve(int[] a) {
+        int res = 0; // Variable to store the sum of differences
+        int n = a.length; // Length of the input array
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                int maxe = Integer.MIN_VALUE; // Initialize max for the subarray
+                int mine = Integer.MAX_VALUE; // Initialize min for the subarray
+                
+                for (int k = i; k <= j; k++) {
+                    maxe = Math.max(maxe, a[k]); // Update max with the current element
+                    mine = Math.min(mine, a[k]); // Update min with the current element
+                }
+                
+                int diff = maxe - mine; // Compute the difference for this subarray
+                res += diff; // Add the difference to the result
+            }
+        }
+        
+        return res; // Return the final result
+    }
+
+    public static void main(String[] args) {
+        // Example input
+        int[] a = {2, 5, 3};
+
+        // Compute and print the result
+        System.out.println(solve(a)); 
+    }
+}
