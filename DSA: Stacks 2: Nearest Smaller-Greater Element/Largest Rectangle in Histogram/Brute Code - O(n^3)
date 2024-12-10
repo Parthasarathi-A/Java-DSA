@@ -1,0 +1,38 @@
+import java.util.*;
+public class Main {
+    public static int largestRectangleArea(int[] A) {
+        int n = A.length;
+        int maxArea = 0; // To store the maximum area found
+
+        // Generate all subarrays
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                int minHeight = A[i]; // Initialize minHeight as the element at index i
+
+                // Find the minimum height for the current subarray [i, j]
+                for (int k = i; k <= j; k++) {
+                    minHeight = Math.min(minHeight, A[k]);
+                }
+
+                // Calculate the area for the current subarray
+                int length = j - i + 1;
+                int area = minHeight * length;
+
+                // Update the maximum area if needed
+                maxArea = Math.max(maxArea, area);
+            }
+        }
+
+        return maxArea;
+    }
+
+    public static void main(String[] args) {
+        // Example input
+        int[] A1 = {2, 1, 5, 6, 2, 3};
+        int[] A2 = {2};
+
+        // Compute and print the largest rectangle area for each input
+        System.out.println(largestRectangleArea(A1)); // Output: 10
+        System.out.println(largestRectangleArea(A2)); // Output: 2
+    }
+}
