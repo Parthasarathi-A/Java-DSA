@@ -1,69 +1,69 @@
-import java.util.*;
-
 public class Solution {
-    public int solve(ArrayList<Integer> A) {
-        int N = A.size();
-        final int MOD = 1000000007;
-
+    public int solve(int[] A) {
+        int MOD = 1000000007;
+        int N = A.length;
+        
         // Arrays to store the next and previous greater and smaller elements
         int[] nextGreater = new int[N];
-        int[] nextSmaller = new int[N];
         int[] prevGreater = new int[N];
+        int[] nextSmaller = new int[N];
         int[] prevSmaller = new int[N];
-
-        Arrays.fill(nextGreater, N);
-        Arrays.fill(nextSmaller, N);
-        Arrays.fill(prevGreater, -1);
-        Arrays.fill(prevSmaller, -1);
-
+        
+        // Initialize stacks
         Stack<Integer> stack = new Stack<>();
-
+        
         // Calculate next greater elements
         for (int i = 0; i < N; i++) {
-            while (!stack.isEmpty() && A.get(stack.peek()) < A.get(i)) {
+            while (!stack.isEmpty() && A[stack.peek()] < A[i]) {
                 nextGreater[stack.pop()] = i;
             }
             stack.push(i);
         }
-        stack.clear();
-
+        while (!stack.isEmpty()) {
+            nextGreater[stack.pop()] = N;
+        }
+        
         // Calculate previous greater elements
         for (int i = N - 1; i >= 0; i--) {
-            while (!stack.isEmpty() && A.get(stack.peek()) <= A.get(i)) {
+            while (!stack.isEmpty() && A[stack.peek()] <= A[i]) {
                 prevGreater[stack.pop()] = i;
             }
             stack.push(i);
         }
-        stack.clear();
-
+        while (!stack.isEmpty()) {
+            prevGreater[stack.pop()] = -1;
+        }
+        
         // Calculate next smaller elements
         for (int i = 0; i < N; i++) {
-            while (!stack.isEmpty() && A.get(stack.peek()) > A.get(i)) {
+            while (!stack.isEmpty() && A[stack.peek()] > A[i]) {
                 nextSmaller[stack.pop()] = i;
             }
             stack.push(i);
         }
-        stack.clear();
-
+        while (!stack.isEmpty()) {
+            nextSmaller[stack.pop()] = N;
+        }
+        
         // Calculate previous smaller elements
         for (int i = N - 1; i >= 0; i--) {
-            while (!stack.isEmpty() && A.get(stack.peek()) >= A.get(i)) {
+            while (!stack.isEmpty() && A[stack.peek()] >= A[i]) {
                 prevSmaller[stack.pop()] = i;
             }
             stack.push(i);
         }
-        stack.clear();
-
+        while (!stack.isEmpty()) {
+            prevSmaller[stack.pop()] = -1;
+        }
+        
+        // Calculate the result
         long result = 0;
-
-        // Calculate the total contribution for each element
         for (int i = 0; i < N; i++) {
             long maxContribution = (long) (i - prevGreater[i]) * (nextGreater[i] - i) % MOD;
             long minContribution = (long) (i - prevSmaller[i]) * (nextSmaller[i] - i) % MOD;
-            long contribution = (A.get(i) * (maxContribution - minContribution)) % MOD;
-            result = (result + contribution) % MOD;
+            result = (result + A[i] * (maxContribution - minContribution) % MOD) % MOD;
         }
-
-        return (int) ((result + MOD) % MOD); // Ensure non-negative result
+        
+        return (int) (result + MOD) % MOD;
     }
 }
