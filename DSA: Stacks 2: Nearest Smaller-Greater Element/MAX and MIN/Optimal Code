@@ -1,0 +1,69 @@
+import java.util.*;
+
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+        int N = A.size();
+        final int MOD = 1000000007;
+
+        // Arrays to store the next and previous greater and smaller elements
+        int[] nextGreater = new int[N];
+        int[] nextSmaller = new int[N];
+        int[] prevGreater = new int[N];
+        int[] prevSmaller = new int[N];
+
+        Arrays.fill(nextGreater, N);
+        Arrays.fill(nextSmaller, N);
+        Arrays.fill(prevGreater, -1);
+        Arrays.fill(prevSmaller, -1);
+
+        Stack<Integer> stack = new Stack<>();
+
+        // Calculate next greater elements
+        for (int i = 0; i < N; i++) {
+            while (!stack.isEmpty() && A.get(stack.peek()) < A.get(i)) {
+                nextGreater[stack.pop()] = i;
+            }
+            stack.push(i);
+        }
+        stack.clear();
+
+        // Calculate previous greater elements
+        for (int i = N - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && A.get(stack.peek()) <= A.get(i)) {
+                prevGreater[stack.pop()] = i;
+            }
+            stack.push(i);
+        }
+        stack.clear();
+
+        // Calculate next smaller elements
+        for (int i = 0; i < N; i++) {
+            while (!stack.isEmpty() && A.get(stack.peek()) > A.get(i)) {
+                nextSmaller[stack.pop()] = i;
+            }
+            stack.push(i);
+        }
+        stack.clear();
+
+        // Calculate previous smaller elements
+        for (int i = N - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && A.get(stack.peek()) >= A.get(i)) {
+                prevSmaller[stack.pop()] = i;
+            }
+            stack.push(i);
+        }
+        stack.clear();
+
+        long result = 0;
+
+        // Calculate the total contribution for each element
+        for (int i = 0; i < N; i++) {
+            long maxContribution = (long) (i - prevGreater[i]) * (nextGreater[i] - i) % MOD;
+            long minContribution = (long) (i - prevSmaller[i]) * (nextSmaller[i] - i) % MOD;
+            long contribution = (A.get(i) * (maxContribution - minContribution)) % MOD;
+            result = (result + contribution) % MOD;
+        }
+
+        return (int) ((result + MOD) % MOD); // Ensure non-negative result
+    }
+}
