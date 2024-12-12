@@ -1,0 +1,61 @@
+class Queue {
+    private int[] arr;
+    private int front, rear, size;
+
+    // Constructor to initialize queue
+    public Queue(int capacity) {
+        arr = new int[capacity];
+        front = -1;
+        rear = -1;
+        size = capacity;
+    }
+
+    // Enqueue operation
+    public void enqueue(int element) {
+        if (rear == -1) { // If queue is empty
+            front = 0;
+            rear = 0;
+        } else if (rear == size - 1) { // If rear is at the end of the array
+            if (front > 0) { // Move elements to the beginning of the array
+                for (int i = front; i <= rear; i++) {
+                    arr[i - front] = arr[i];
+                }
+                rear = rear - front;
+                front = 0;
+            } else { // Resize array
+                int newSize = size * 2;
+                int[] newArr = new int[newSize];
+                for (int i = front; i <= rear; i++) {
+                    newArr[i - front] = arr[i];
+                }
+                arr = newArr;
+                rear = rear - front;
+                front = 0;
+                size = newSize;
+            }
+        }
+        arr[rear] = element; // Add the element
+        rear++; // Increment rear
+    }
+
+    // Dequeue operation
+    public int dequeue() {
+        if (front == -1) { // If queue is empty
+            System.out.println("Queue is empty");
+            return -1;
+        } else {
+            int element = arr[front];
+            front++; // Increment front
+            if (front > rear) { // Reset queue if it becomes empty
+                front = -1;
+                rear = -1;
+            }
+            return element;
+        }
+    }
+
+    // Check if the queue is empty
+    public boolean isEmpty() {
+        return front == -1;
+    }
+}
