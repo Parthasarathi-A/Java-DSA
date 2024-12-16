@@ -1,0 +1,57 @@
+import java.util.ArrayList;
+import java.util.Stack;
+
+public class Main {
+    
+    // Function to perform preorder traversal iteratively
+    public ArrayList<Integer> solve(TreeNode root) {
+        ArrayList<Integer> result = new ArrayList<>();
+        Stack<TreeNode> st = new Stack<>();
+        TreeNode curr = root;
+        
+        // Iterate while there are nodes to process
+        while (curr != null || !st.isEmpty()) {
+            if (curr != null) {
+                result.add(curr.val);  // Process the current node (preorder)
+                st.push(curr);  // Push the node to the stack
+                curr = curr.left;  // Move to the left child
+            } else {
+                curr = st.pop();  // Pop a node from the stack
+                curr = curr.right;  // Move to the right child
+            }
+        }
+        
+        return result;  // Return the result of the traversal
+    }
+
+    // TreeNode class to represent each node in the binary tree
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        
+        TreeNode(int val) {
+            this.val = val;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    public static void main(String[] args) {
+        // Create a sample binary tree
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(7);
+        
+        // Call the solve method to get the preorder traversal
+        Main main = new Main();
+        ArrayList<Integer> result = main.solve(root);
+        
+        // Print the result
+        System.out.println(result);  // Output: [1, 2, 4, 5, 3, 6, 7]
+    }
+}
