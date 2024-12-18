@@ -1,0 +1,34 @@
+public class Solution {
+    private boolean canPartition = false;
+
+    public int solve(TreeNode A) {
+        if (A == null) return 0;
+
+        long totalSum = getSum(A);
+
+        // If total sum is odd, partition is not possible
+        if (totalSum % 2 != 0) return 0;
+        // Check if a partition exists
+        long halfSum = totalSum / 2;
+        
+        checkPartition(A, halfSum);
+        // Return 1 if partition exists, otherwise return 0
+        return canPartition ? 1 : 0;
+    }
+
+    private long checkPartition(TreeNode A, long halfSum) {
+        if (A == null) return 0;
+
+        long currentSum = (long)A.val + checkPartition(A.left, halfSum) + checkPartition(A.right, halfSum);
+
+        // Check if current subtree sum equals half of the total sum
+        if (currentSum == halfSum) canPartition = true;
+
+        return currentSum;
+    }
+
+    private long getSum(TreeNode A) {
+        if (A == null) return 0;
+        return (long)A.val + getSum(A.left) + getSum(A.right);
+    }
+}
