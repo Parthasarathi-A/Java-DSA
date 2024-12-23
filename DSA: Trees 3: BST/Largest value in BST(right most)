@@ -1,0 +1,14 @@
+public class Solution {
+    public int solve(TreeNode A, int B) {
+        // Initialize temp as the root node
+        TreeNode temp = A;
+
+        // Traverse the right subtree to find the smallest node
+        while (temp.right != null) {
+            temp = temp.right;
+        }
+
+        // Return the value of the smallest node
+        return temp.val;
+    }
+}
