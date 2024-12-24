@@ -1,0 +1,24 @@
+public class Solution {
+    public int isValidBST(TreeNode A) {
+        TreeNode curr = A;
+        Stack<TreeNode> st = new Stack<>();
+        int prev = -1; 
+        
+        while (!st.isEmpty() || curr != null) {
+            // Traverse to the leftmost node
+            while (curr != null) {
+                st.push(curr);
+                curr = curr.left;
+            }
+            // Process the top node
+            curr = st.pop();
+            if (curr.val < prev) {
+                return 0; // Not a valid BST
+            }
+            prev = curr.val; // Update previous node value
+            // Move to the right subtree
+            curr = curr.right;
+        }
+        return 1; // The tree is a valid BST
+    }
+}
