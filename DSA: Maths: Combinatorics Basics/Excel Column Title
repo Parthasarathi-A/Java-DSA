@@ -1,0 +1,28 @@
+import java.util.HashMap;
+
+public class Solution {
+    public String convertToTitle(int A) {
+        HashMap<Integer, Character> map = new HashMap<>();
+        String ans = "";
+
+        // Populate the HashMap with mappings from 1 to 26
+        for (int i = 1; i <= 26; i++) {
+            char ch = (char) (i - 1 + 'A');
+            map.put(i, ch);
+        }
+
+        // Convert the number to the corresponding title
+        while (A > 0) {
+            int rem = A % 26;
+            A /= 26;
+            if (rem == 0) {
+                rem = 26;
+                A--; // Adjust for the zero remainder (Z case)
+            }
+            ans = map.get(rem) + ans; // Prepend the character to the result
+            
+        }
+
+        return ans;
+    }
+}
