@@ -1,0 +1,16 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> solve(int A) {
+         int[][] res = new int[A][A];
+        for(int i = 0; i<A;i++){
+            for(int j = 0; j<=i;j++){
+                if(i==j||j==0){
+                    res[i][j]=1;
+                }
+                else{
+                    res[i][j]=res[i-1][j-1]+res[i-1][j];
+                }
+            }
+        }
+        return res; 
+    }
+}
